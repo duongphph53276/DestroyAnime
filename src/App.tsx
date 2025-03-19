@@ -1,5 +1,3 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import './index.css';
 import { useRoutes } from 'react-router-dom';
@@ -8,6 +6,7 @@ import AdminLayout from './layout/admin';
 import Dashboard from './components/admin/Dashboard';
 import ElementInformation from './components/docs/ElementInfomation';
 import DocsLayout from './layout/docs';
+import ListHeroes from './components/admin/ListHeroes';
 
 function App() {
   const routes = useRoutes([
@@ -17,6 +16,7 @@ function App() {
     {
       path:'/admin',element:<AdminLayout/>, children:[
         {path:'', element:<Dashboard/>},
+        {path:'heroes', element:<ListHeroes/>}
       ]
     },
     {

@@ -1,4 +1,4 @@
-export type ElementType = 
+export type ElementGame = 
     | "Water"    // 🌊 Biển  
     | "Fire"     // 🔥 Dung Nham  
     | "Earth"    // 🏔️ Đá  

@@ -1,0 +1,155 @@
+{
+    "users": [],
+    "heroes": [
+    {
+      "id": 1,
+      "name": "Auron",
+      "description": "A skilled warrior from the highlands.",
+      "class": "Fighter",
+      "rarity": "Rare",
+      "element": "Stone",
+      "level": 1,
+      "experience": 0,
+      "hp": 1200,
+      "attack": 180,
+      "defense": 100,
+      "speed": 90,
+      "rageCost": 50,
+      "critRate": 10,
+      "critDmg": 150,
+      "lifesteal": 5,
+      "skills": [
+        {
+          "id": 101,
+          "name": "Rock Smash",
+          "description": "Deals damage and reduces enemy defense.",
+          "cooldown": 3,
+          "manaCost": 30,
+          "skillType": "Active",
+          "effect": {
+            "type": "Debuff",
+            "statAffected": "defense",
+            "value": 15,
+            "duration": 2
+          }
+        }
+      ],
+      "image": "/images/heroes/aqua_knight.png"
+    },
+    {
+      "id": 2,
+      "name": "Zephyrus",
+      "description": "A legendary wind sorcerer.",
+      "class": "Mage",
+      "rarity": "Mythic",
+      "element": "Wind",
+      "level": 1,
+      "experience": 0,
+      "hp": 900,
+      "attack": 250,
+      "defense": 80,
+      "speed": 120,
+      "rageCost": 60,
+      "critRate": 15,
+      "critDmg": 180,
+      "lifesteal": 0,
+      "skills": [
+        {
+          "id": 201,
+          "name": "Gale Force",
+          "description": "Summons a powerful windstorm to damage all enemies.",
+          "cooldown": 4,
+          "manaCost": 40,
+          "skillType": "Active",
+          "effect": {
+            "type": "Debuff",
+            "statAffected": "speed",
+            "value": 20,
+            "duration": 2
+          }
+        }
+      ],
+      "exclusiveSkills": [
+        {
+          "id": 202,
+          "name": "Eye of the Storm",
+          "description": "Greatly increases speed for a short duration.",
+          "cooldown": 5,
+          "manaCost": 50,
+          "skillType": "Active",
+          "effect": {
+            "type": "Buff",
+            "statAffected": "speed",
+            "value": 30,
+            "duration": 3
+          }
+        }
+      ],
+      "image": "/images/heroes/aqua_knight.png"
+
+    },
+    {
+      "id": 3,
+      "name": "Oblivion",
+      "description": "An enigmatic warrior with unknown origins.",
+      "class": "Assassin",
+      "rarity": "???",
+      "element": "Dark",
+      "level": 1,
+      "experience": 0,
+      "hp": 1100,
+      "attack": 300,
+      "defense": 90,
+      "speed": 130,
+      "rageCost": 70,
+      "critRate": 20,
+      "critDmg": 200,
+      "lifesteal": 10,
+      "skills": [
+        {
+          "id": 301,
+          "name": "Shadow Strike",
+          "description": "Deals massive critical damage in darkness.",
+          "cooldown": 4,
+          "manaCost": 50,
+          "skillType": "Active",
+          "effect": {
+            "type": "Buff",
+            "statAffected": "critDmg",
+            "value": 50,
+            "duration": 2
+          }
+        }
+      ],
+      "exclusiveSkills": [
+        {
+          "id": 302,
+          "name": "Void Step",
+          "description": "Becomes untargetable for one turn.",
+          "cooldown": 6,
+          "manaCost": 60,
+          "skillType": "Active",
+          "effect": {
+            "type": "Buff",
+            "statAffected": "speed",
+            "value": 50,
+            "duration": 1
+          }
+        }
+      ],
+      "image": "/images/heroes/aqua_knight.png"
+    }
+  ],
+    "monsters": [],
+    "skills": [],
+    "items": [],
+    "gachaRates": {
+      "Common": 50,
+      "Uncommon": 30,
+      "Rare": 15,
+      "Epic": 4,
+      "Legendary": 1,
+      "Mythic": 0.01
+    }
+  }
+  

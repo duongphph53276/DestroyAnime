@@ -32,23 +32,23 @@ const SidebarAdmin = ({ darkMode, setDarkMode }: SidebarAdminProps) => {
           </Link>
         </li>
 
-        {/* Quản lý sản phẩm */}
+        {/* Quản lý anh hùng */}
         <li className="relative">
           <button
             onClick={() => setDropdownOpen({ ...dropdownOpen, products: !dropdownOpen.products })}
             className="w-full text-left p-3 rounded-md flex justify-between items-center hover:bg-gray-100 dark:hover:bg-gray-700 transition"
           >
-            Quản lý sản phẩm <span>{dropdownOpen.products ? "▲" : "▼"}</span>
+            Quản lý anh hùng <span>{dropdownOpen.products ? "▲" : "▼"}</span>
           </button>
           {dropdownOpen.products && (
             <ul className="ml-4 border-l border-gray-300 dark:border-gray-600 pl-2 mt-1 space-y-1">
               <li>
-                <Link to="/admin/products" className="block p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                <Link to="/admin/heroes" className="block p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition">
                   Danh sách
                 </Link>
               </li>
               <li>
-                <Link to="/admin/addproducts" className="block p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                <Link to="/admin/heroes/add" className="block p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition">
                   Thêm mới
                 </Link>
               </li>
