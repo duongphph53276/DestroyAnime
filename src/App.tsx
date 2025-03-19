@@ -7,6 +7,7 @@ import Welcome from './components/Welcome';
 import AdminLayout from './layout/admin';
 import Dashboard from './components/admin/Dashboard';
 import ElementInformation from './components/docs/ElementInfomation';
+import DocsLayout from './layout/docs';
 
 function App() {
   const routes = useRoutes([
@@ -19,7 +20,11 @@ function App() {
       ]
     },
     {
-      path:'/docs',element:<ElementInformation/>
+      path:'/docs',element:<DocsLayout/>,children:[
+        {
+          path:'element', element:<ElementInformation/>
+        }
+      ]
     }
   ])
   return routes

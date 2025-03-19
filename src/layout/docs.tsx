@@ -1,23 +1,21 @@
-import { Outlet } from "react-router-dom";
-import HeaderClient from "./client/header"; // Tái sử dụng header từ ClientLayout
-import FooterClient from "./client/footer"; // Tái sử dụng footer từ ClientLayout
-import SidebarClient from "./client/sidebar"; // Tái sử dụng sidebar từ ClientLayout
+import { Outlet } from "react-router-dom"
+import HeaderDocs from "./docs/header"
+import SidebarDocs from "./docs/sidebar"
+import FooterDocs from "./docs/footer"
 
 const DocsLayout = () => {
   return (
-    <main className="bg-gray-100 min-h-screen">
-      <HeaderClient />
-      <div className="flex gap-6 px-6 py-8 max-w-7xl mx-auto">
-        <aside className="w-1/4">
-          <SidebarClient />
-        </aside>
-        <section className="w-3/4 bg-white rounded-lg shadow-md p-6">
-          <Outlet />
-        </section>
-      </div>
-      <FooterClient />
+    <main className="bg-white">
+        <HeaderDocs/>
+        <div className="flex gap-4 pb-4">
+            <SidebarDocs/>
+            <div className="border content w-4/5 p-4">
+                <Outlet/>
+            </div>
+        </div>
+        <FooterDocs/>
     </main>
-  );
-};
+  )
+}
 
-export default DocsLayout;
+export default DocsLayout
