@@ -6,11 +6,20 @@ const ListHeroes: React.FC = () => {
   const [heroes, setHeroes] = useState<IHero[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/heroes") // Cập nhật URL nếu dùng json-server
-      .then((response) => response.json())
-      .then((data) => setHeroes(data))
+    fetch("http://localhost:3000/heroes")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Fetched heroes:", data);
+        setHeroes(Array.isArray(data) ? data : []);
+      })
       .catch((error) => console.error("Error loading heroes:", error));
   }, []);
+  
 
   return (
     <div className="p-6 bg-gray-100 dark:bg-gray-800 min-h-screen transition-colors">

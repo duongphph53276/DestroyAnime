@@ -7,16 +7,22 @@ import Dashboard from './components/admin/Dashboard';
 import ElementInformation from './components/docs/ElementInfomation';
 import DocsLayout from './layout/docs';
 import ListHeroes from './components/admin/ListHeroes';
+import Summoner from './components/client/Summoner';
 
 function App() {
   const routes = useRoutes([
     {
-      path:'', element:<Welcome/>
-    },
-    {
       path:'/admin',element:<AdminLayout/>, children:[
         {path:'', element:<Dashboard/>},
         {path:'heroes', element:<ListHeroes/>}
+      ]
+    },
+    {
+      path:'',element:<AdminLayout/>,children:[
+        {path:'summon',element:<Summoner/>},
+        {
+          path:'', element:<Welcome/>
+        }
       ]
     },
     {
