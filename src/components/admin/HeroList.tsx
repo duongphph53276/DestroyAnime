@@ -2,6 +2,16 @@ import React, { useEffect, useState } from "react";
 import { IHero } from "../../interfaces/Hero";
 import { Link } from "react-router-dom";
 
+const rarityStyles: { [key: string]: string } = {
+  Common: "border-gray-400 bg-gray-200 text-gray-800 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200",
+  Uncommon: "border-green-500 bg-green-200 text-green-800 dark:border-green-700 dark:bg-green-900 dark:text-green-200",
+  Rare: "border-blue-500 bg-blue-200 text-blue-800 dark:border-blue-700 dark:bg-blue-900 dark:text-blue-200",
+  Epic: "border-purple-500 bg-purple-200 text-purple-800 dark:border-purple-700 dark:bg-purple-900 dark:text-purple-200",
+  Legendary: "border-yellow-500 bg-yellow-200 text-yellow-800 dark:border-yellow-700 dark:bg-yellow-900 dark:text-yellow-200",
+  Mythic: "border-red-500 bg-red-200 text-red-800 dark:border-red-700 dark:bg-red-900 dark:text-red-200",
+  "???": "border-pink-500 bg-gradient-to-r from-pink-500 to-purple-500 text-white dark:from-pink-700 dark:to-purple-700",
+};
+
 const ListHeroes: React.FC = () => {
   const [heroes, setHeroes] = useState<IHero[]>([]);
 
@@ -19,7 +29,6 @@ const ListHeroes: React.FC = () => {
       })
       .catch((error) => console.error("Error loading heroes:", error));
   }, []);
-  
 
   return (
     <div className="p-6 bg-gray-100 dark:bg-gray-800 min-h-screen transition-colors">
@@ -51,8 +60,6 @@ const ListHeroes: React.FC = () => {
               <th className="py-2 px-4">Crit Rate</th>
               <th className="py-2 px-4">Crit DMG</th>
               <th className="py-2 px-4">Lifesteal</th>
-              <th className="py-2 px-4">Skills</th>
-              <th className="py-2 px-4">Exclusive Skills</th>
               <th className="py-2 px-4">Actions</th>
             </tr>
           </thead>
@@ -60,7 +67,9 @@ const ListHeroes: React.FC = () => {
             {heroes.map((hero) => (
               <tr
                 key={hero.id}
-                className="border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                className={`border-b border-opacity-50 transition-colors ${
+                  rarityStyles[hero.rarity] || "border-gray-200 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                } hover:bg-opacity-80`}
               >
                 <td className="py-2 px-4 font-semibold">{hero.name}</td>
                 <td>
@@ -81,20 +90,6 @@ const ListHeroes: React.FC = () => {
                 <td className="py-2 px-4">{hero.critRate}%</td>
                 <td className="py-2 px-4">{hero.critDamage}%</td>
                 <td className="py-2 px-4">{hero.lifesteal}%</td>
-                <td className="py-2 px-4">
-                  {hero.skills.map((skill) => (
-                    <div key={skill.id} className="text-sm">
-                      {skill.name} ({skill.description})
-                    </div>
-                  ))}
-                </td>
-                <td className="py-2 px-4">
-                  {hero.exclusiveSkills?.map((skill) => (
-                    <div key={skill.id} className="text-sm">
-                      {skill.name} ({skill.description})
-                    </div>
-                  )) || "None"}
-                </td>
                 <td className="py-2 px-4">
                   <Link
                     to={`/admin/heroes/edit/${hero.id}`}

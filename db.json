@@ -2,22 +2,160 @@
   "users": [
     {
       "id": 1,
-      "name": "Player1",
+      "username": "admin1",
+      "email": "admin1@example.com",
+      "phone": "1234567890",
+      "role": "admin",
+      "password": "$2a$10$hashedpassword1",
+      "isLocked": false,
+      "lockUntil": null,
+      "silver": 5000,
+      "gold": 200,
+      "diamonds": 10000
+    },
+    {
+      "id": 2,
+      "username": "admin2",
+      "email": "admin2@example.com",
+      "phone": "0987654321",
+      "role": "admin",
+      "password": "$2a$10$hashedpassword2",
+      "isLocked": false,
+      "lockUntil": null,
+      "silver": 4000,
+      "gold": 150,
+      "diamonds": 8000
+    },
+    {
+      "id": 3,
+      "username": "player1",
+      "email": "player1@example.com",
+      "phone": "1122334455",
+      "role": "client",
+      "password": "$2a$10$hashedpassword3",
+      "isLocked": false,
+      "lockUntil": null,
       "silver": 1000,
       "gold": 50,
       "diamonds": 5000
+    },
+    {
+      "email": "admin@example.com",
+      "password": "$2a$10$AiJnh3MsgGRwgdtKytfgpuq1qn4uGEzTctERrLJQpy8CI3GSI3Tpy",
+      "username": "admin@example.com",
+      "role": "admin",
+      "id": 4
+    },
+    {
+      "email": "client123@gmail.com",
+      "password": "$2a$10$5l/7bsV37MtX0GMmRpvJi.NJA.u2RNemmksyrSoMNr4NjRUPCDYLC",
+      "username": "Client123",
+      "phone": "9090909090",
+      "role": "client",
+      "id": 5
+    },
+    {
+      "email": "client@example.com",
+      "password": "$2a$10$K/5XSkW0OBj93xl7Ei9csOwjAts.JQ5WSfbEiV9HHVaeBCBW2ggJG",
+      "username": "client@example.com",
+      "phone": "9090909090",
+      "role": "client",
+      "id": 6
+    },
+    {
+      "email": "duong@example.com",
+      "password": "$2a$10$SJjAwiSazvxOY5cwbDWF0ub8VDuXTrcKXTvcfgqnGLSubn.DimCK.",
+      "username": "Duong",
+      "phone": "4123123121",
+      "role": "client",
+      "id": 7
     }
   ],
   "heroes": [
-    { "id": 1, "name": "Arthur", "class": "Tanker", "rarity": "Legendary", "element": "Light" },
-    { "id": 2, "name": "Lilith", "class": "Mage", "rarity": "Epic", "element": "Dark" },
-    { "id": 3, "name": "Fenrir", "class": "Assassin", "rarity": "Rare", "element": "Wind" },
-    { "id": 4, "name": "Arthur", "class": "Tanker", "rarity": "???", "element": "Light" },
-    { "id": 5, "name": "Lilith", "class": "Mage", "rarity": "???", "element": "Dark" },
-    { "id": 6, "name": "Fenrir", "class": "Assassin", "rarity": "???", "element": "Wind" },
-    { "id": 7, "name": "Arthur", "class": "Tanker", "rarity": "Mythic", "element": "Earth" },
-    { "id": 8, "name": "Lilith", "class": "Mage", "rarity": "Mythic", "element": "Water" },
-    { "id": 9, "name": "Fenrir", "class": "Assassin", "rarity": "Mythic", "element": "Fire" }
+    {
+      "id": 1,
+      "name": "Arthur",
+      "class": "Tanker",
+      "rarity": "Legendary",
+      "element": "Light"
+    },
+    {
+      "id": 2,
+      "name": "Lilith",
+      "class": "Mage",
+      "rarity": "Epic",
+      "element": "Dark"
+    },
+    {
+      "id": 3,
+      "name": "Fenrir",
+      "class": "Assassin",
+      "rarity": "Rare",
+      "element": "Wind"
+    },
+    {
+      "id": 4,
+      "name": "Arthur",
+      "class": "Tanker",
+      "rarity": "???",
+      "element": "Light"
+    },
+    {
+      "id": 5,
+      "name": "Lilith",
+      "class": "Mage",
+      "rarity": "???",
+      "element": "Dark"
+    },
+    {
+      "id": 6,
+      "name": "Fenrir",
+      "class": "Assassin",
+      "rarity": "???",
+      "element": "Wind"
+    },
+    {
+      "id": 7,
+      "name": "Arthur",
+      "class": "Tanker",
+      "rarity": "Mythic",
+      "element": "Earth"
+    },
+    {
+      "id": 8,
+      "name": "Lilith",
+      "class": "Mage",
+      "rarity": "Mythic",
+      "element": "Water"
+    },
+    {
+      "id": 9,
+      "name": "Fenrir",
+      "class": "Assassin",
+      "rarity": "Mythic",
+      "element": "Fire"
+    },
+    {
+      "id": 10,
+      "name": "Fenrir",
+      "class": "Assassin",
+      "rarity": "Common",
+      "element": "Fire"
+    },
+    {
+      "id": 11,
+      "name": "Fenrir",
+      "class": "Assassin",
+      "rarity": "Uncommon",
+      "element": "Fire"
+    },
+    {
+      "id": 12,
+      "name": "Fenrir",
+      "class": "Assassin",
+      "rarity": "Uncommon",
+      "element": "Fire"
+    }
   ],
   "monsters": [],
   "skills": [],

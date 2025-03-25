@@ -1,84 +1,59 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-const SidebarAdmin = () => {
+const SidebarClient = () => {
   const location = useLocation();
   const [dropdownOpen, setDropdownOpen] = useState<{ [key: string]: boolean }>({
-    products: false,
-    category: false,
-    users: false,
+    orders: false,
+    profile: false,
   });
 
-  const isActive = (path: string) => location.pathname.includes(path) ? "bg-gray-200" : "hover:bg-gray-100";
+  const isActive = (path: string) =>
+    location.pathname === path ? "bg-yellow-100" : "hover:bg-gray-100";
 
   return (
-    <div className="w-64 h-screen bg-white shadow-md p-4">
+    <div className="w-64 bg-white shadow-md p-4">
       <ul className="space-y-2">
-        {/* Dashboard */}
-        <li className={`p-3 rounded-md ${isActive("/admin")}`}>
-          <Link to="/admin" className="block">Dashboard</Link>
+        {/* Trang chủ */}
+        <li className={`p-3 rounded-md ${isActive("/")}`}>
+          <Link to="/" className="block">Trang chủ</Link>
         </li>
 
-        {/* Quản lý sản phẩm */}
+        {/* Đơn hàng */}
         <li className="relative">
           <button
-            onClick={() => setDropdownOpen({ ...dropdownOpen, products: !dropdownOpen.products })}
-            className={`w-full text-left p-3 rounded-md flex justify-between items-center ${isActive("/admin/products")}`}
+            onClick={() => setDropdownOpen({ ...dropdownOpen, orders: !dropdownOpen.orders })}
+            className={`w-full text-left p-3 rounded-md flex justify-between items-center ${isActive("/orders")}`}
           >
-            Quản lý sản phẩm <span>{dropdownOpen.products ? "▲" : "▼"}</span>
+            Đơn hàng của tôi <span>{dropdownOpen.orders ? "▲" : "▼"}</span>
           </button>
-          {dropdownOpen.products && (
+          {dropdownOpen.orders && (
             <ul className="absolute left-0 w-full bg-white shadow-md rounded-md mt-1 z-10">
               <li className="p-2 hover:bg-gray-200">
-                <Link to="/admin/products">Danh sách</Link>
+                <Link to="/orders">Danh sách đơn hàng</Link>
               </li>
               <li className="p-2 hover:bg-gray-200">
-                <Link to="/admin/addproducts">Thêm mới</Link>
+                <Link to="/orders/new">Tạo đơn hàng mới</Link>
               </li>
             </ul>
           )}
         </li>
 
-        {/* Quản lý đơn hàng */}
-        <li className={`p-3 rounded-md ${isActive("/admin/orders")}`}>
-          <Link to="/admin/orders" className="block">Quản lý đơn hàng</Link>
-        </li>
-
-        {/* Quản lý danh mục */}
+        {/* Hồ sơ */}
         <li className="relative">
           <button
-            onClick={() => setDropdownOpen({ ...dropdownOpen, category: !dropdownOpen.category })}
-            className={`w-full text-left p-3 rounded-md flex justify-between items-center ${isActive("/admin/category")}`}
+            onClick={() => setDropdownOpen({ ...dropdownOpen, profile: !dropdownOpen.profile })}
+            className={`w-full text-left p-3 rounded-md flex justify-between items-center ${isActive("/profile")}`}
           >
-            Quản lý danh mục <span>{dropdownOpen.category ? "▲" : "▼"}</span>
+            Hồ sơ <span>{dropdownOpen.profile ? "▲" : "▼"}</span>
           </button>
-          {dropdownOpen.category && (
+          {dropdownOpen.profile && (
             <ul className="absolute left-0 w-full bg-white shadow-md rounded-md mt-1 z-10">
               <li className="p-2 hover:bg-gray-200">
-                <Link to="/admin/category">Danh sách</Link>
+                <Link to="/profile">Thông tin cá nhân</Link>
               </li>
               <li className="p-2 hover:bg-gray-200">
-                <Link to="/admin/addcategory">Thêm mới</Link>
-              </li>
-            </ul>
-          )}
-        </li>
-
-        {/* Quản lý người dùng */}
-        <li className="relative">
-          <button
-            onClick={() => setDropdownOpen({ ...dropdownOpen, users: !dropdownOpen.users })}
-            className={`w-full text-left p-3 rounded-md flex justify-between items-center ${isActive("/admin/users")}`}
-          >
-            Quản lý người dùng <span>{dropdownOpen.users ? "▲" : "▼"}</span>
-          </button>
-          {dropdownOpen.users && (
-            <ul className="absolute left-0 w-full bg-white shadow-md rounded-md mt-1 z-10">
-              <li className="p-2 hover:bg-gray-200">
-                <Link to="/admin/users">Danh sách</Link>
-              </li>
-              <li className="p-2 hover:bg-gray-200">
-                <Link to="/admin/addusers">Thêm mới</Link>
+                <Link to="/profile/edit">Chỉnh sửa hồ sơ</Link>
               </li>
             </ul>
           )}
@@ -88,4 +63,4 @@ const SidebarAdmin = () => {
   );
 };
 
-export default SidebarAdmin;
+export default SidebarClient;
