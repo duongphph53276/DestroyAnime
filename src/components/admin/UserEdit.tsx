@@ -1,29 +1,28 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Iuser } from "../../interfaces/user"; // Đảm bảo đường dẫn đúng
+import { Iuser } from "../../interfaces/user";
 import { useOutletContext } from "react-router-dom";
 
 const UserEdit = () => {
-  const { darkMode } = useOutletContext<{ darkMode: boolean }>(); // Đồng bộ dark mode từ AdminLayout
-  const { id } = useParams<{ id: string }>(); // Lấy ID người dùng từ URL
+  const { darkMode } = useOutletContext<{ darkMode: boolean }>();
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [user, setUser] = useState<Iuser | null>(null);
   const [newPassword, setNewPassword] = useState("");
+  const [lockReason, setLockReason] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Tùy chọn khóa tài khoản (tính bằng milliseconds)
   const lockOptions = {
-    "1d": 1 * 24 * 60 * 60 * 1000, // 1 ngày
-    "3d": 3 * 24 * 60 * 60 * 1000, // 3 ngày
-    "1w": 7 * 24 * 60 * 60 * 1000, // 1 tuần
-    "1m": 30 * 24 * 60 * 60 * 1000, // 1 tháng (ước lượng 30 ngày)
-    "1y": 365 * 24 * 60 * 60 * 1000, // 1 năm (ước lượng 365 ngày)
-    "100y": 100 * 365 * 24 * 60 * 60 * 1000, // 100 năm
+    "1d": 1 * 24 * 60 * 60 * 1000,
+    "3d": 3 * 24 * 60 * 60 * 1000,
+    "1w": 7 * 24 * 60 * 60 * 1000,
+    "1m": 30 * 24 * 60 * 60 * 1000,
+    "1y": 365 * 24 * 60 * 60 * 1000,
+    "100y": 100 * 365 * 24 * 60 * 60 * 1000,
   };
 
-  // Lấy thông tin người dùng khi component mount
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -40,7 +39,6 @@ const UserEdit = () => {
     fetchUser();
   }, [id]);
 
-  // Cập nhật mật khẩu
   const handleUpdatePassword = async () => {
     if (!newPassword) {
       alert("Vui lòng nhập mật khẩu mới!");
@@ -53,40 +51,50 @@ const UserEdit = () => {
 
     try {
       await axios.patch(`http://localhost:3000/users/${id}`, {
-        password: newPassword, // Giả định backend băm mật khẩu
+        password: newPassword,
       });
       alert("Cập nhật mật khẩu thành công!");
-      setNewPassword(""); // Reset input
+      setNewPassword("");
     } catch (err) {
       console.error("Lỗi khi cập nhật mật khẩu:", err);
       alert("Cập nhật mật khẩu thất bại!");
     }
   };
 
-  // Khóa tài khoản
   const handleLockAccount = async (duration: keyof typeof lockOptions) => {
+    if (!lockReason.trim()) {
+      alert("Vui lòng nhập lý do khóa tài khoản!");
+      return;
+    }
+
     const lockUntil = new Date(Date.now() + lockOptions[duration]).toISOString();
     try {
       await axios.patch(`http://localhost:3000/users/${id}`, {
         isLocked: true,
         lockUntil,
+        lockReason,
       });
-      setUser((prev) => prev ? { ...prev, isLocked: true, lockUntil } : null);
+      setUser((prev) =>
+        prev ? { ...prev, isLocked: true, lockUntil, lockReason } : null
+      );
       alert(`Khóa tài khoản thành công đến ${new Date(lockUntil).toLocaleString()}!`);
+      setLockReason("");
     } catch (err) {
       console.error("Lỗi khi khóa tài khoản:", err);
       alert("Khóa tài khoản thất bại!");
     }
   };
 
-  // Mở khóa tài khoản
   const handleUnlockAccount = async () => {
     try {
       await axios.patch(`http://localhost:3000/users/${id}`, {
         isLocked: false,
         lockUntil: null,
+        lockReason: undefined,
       });
-      setUser((prev) => prev ? { ...prev, isLocked: false, lockUntil: null } : null);
+      setUser((prev) =>
+        prev ? { ...prev, isLocked: false, lockUntil: null, lockReason: undefined } : null
+      );
       alert("Mở khóa tài khoản thành công!");
     } catch (err) {
       console.error("Lỗi khi mở khóa tài khoản:", err);
@@ -116,7 +124,6 @@ const UserEdit = () => {
         Chỉnh Sửa Người Dùng: {user.username}
       </h2>
       <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-        {/* Thông tin người dùng (chỉ hiển thị, không sửa) */}
         <div className="mb-6">
           <p><strong>ID:</strong> {user.id}</p>
           <p><strong>Username:</strong> {user.username}</p>
@@ -125,11 +132,14 @@ const UserEdit = () => {
           <p><strong>Role:</strong> {user.role}</p>
           <p><strong>Trạng thái:</strong> {user.isLocked ? "Khóa" : "Hoạt động"}</p>
           {user.isLocked && user.lockUntil && (
-            <p><strong>Khóa đến:</strong> {new Date(user.lockUntil).toLocaleString()}</p>
+            <>
+              <p><strong>Khóa đến:</strong> {new Date(user.lockUntil).toLocaleString()}</p>
+              <p><strong>Lý do khóa:</strong> {user.lockReason || "Không có lý do"}</p>
+            </>
           )}
+          <p><strong>Ngày tạo tài khoản:</strong> {new Date(user.createdAt).toLocaleString()}</p>
         </div>
 
-        {/* Form chỉnh sửa mật khẩu */}
         <div className="mb-6">
           <h3 className={`text-lg font-semibold ${darkMode ? "text-blue-300" : "text-blue-600"} mb-2`}>
             Cập nhật mật khẩu
@@ -153,7 +163,6 @@ const UserEdit = () => {
           </button>
         </div>
 
-        {/* Quản lý khóa/mở khóa tài khoản */}
         <div>
           <h3 className={`text-lg font-semibold ${darkMode ? "text-blue-300" : "text-blue-600"} mb-2`}>
             Quản lý trạng thái tài khoản
@@ -168,19 +177,29 @@ const UserEdit = () => {
               Mở khóa tài khoản
             </button>
           ) : (
-            <div className="flex flex-wrap gap-2">
-              {Object.keys(lockOptions).map((duration) => (
-                <button
-                  key={duration}
-                  onClick={() => handleLockAccount(duration as keyof typeof lockOptions)}
-                  className={`px-4 py-2 rounded-md ${
-                    darkMode ? "bg-red-500 hover:bg-red-600" : "bg-red-600 hover:bg-red-500"
-                  } text-white transition`}
-                >
-                  Khóa {duration}
-                </button>
-              ))}
-            </div>
+            <>
+              <textarea
+                value={lockReason}
+                onChange={(e) => setLockReason(e.target.value)}
+                placeholder="Nhập lý do khóa tài khoản..."
+                className={`w-full p-3 border rounded-lg mb-4 focus:ring-2 focus:ring-blue-500 ${
+                  darkMode ? "bg-gray-700 text-white border-gray-600" : "bg-white text-gray-900 border-gray-300"
+                }`}
+              />
+              <div className="flex flex-wrap gap-2">
+                {Object.keys(lockOptions).map((duration) => (
+                  <button
+                    key={duration}
+                    onClick={() => handleLockAccount(duration as keyof typeof lockOptions)}
+                    className={`px-4 py-2 rounded-md ${
+                      darkMode ? "bg-red-500 hover:bg-red-600" : "bg-red-600 hover:bg-red-500"
+                    } text-white transition`}
+                  >
+                    Khóa {duration}
+                  </button>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </div>

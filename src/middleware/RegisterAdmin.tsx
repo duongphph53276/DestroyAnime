@@ -19,7 +19,11 @@ const RegisterAdmin = () => {
     setLoading(true);
     const formData = new FormData(e.currentTarget);
     const values = Object.fromEntries(formData.entries());
-    const registerData = { ...values, role: "admin" }; // Vai trò mặc định là "admin"
+    const registerData = {
+      ...values,
+      role: "admin",
+      createdAt: new Date().toISOString(), // Thêm createdAt
+    };
 
     try {
       await axios.post("http://localhost:3000/register", registerData);
@@ -35,7 +39,7 @@ const RegisterAdmin = () => {
         alert("Đăng ký thất bại! Có lỗi xảy ra.");
       }
     } finally {
-      setLoading(false); // Đặt lại loading trong mọi trường hợp
+      setLoading(false);
     }
   };
 

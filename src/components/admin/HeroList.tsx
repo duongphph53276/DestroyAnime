@@ -47,19 +47,12 @@ const ListHeroes: React.FC = () => {
         <table className="min-w-full bg-white dark:bg-gray-900 shadow-md rounded-lg">
           <thead>
             <tr className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 text-left">
+              <th className="py-2 px-4">ID</th>
               <th className="py-2 px-4">Name</th>
               <th className="py-2 px-4">Image</th>
-              <th className="py-2 px-4">Description</th>
               <th className="py-2 px-4">Class</th>
-              <th className="py-2 px-4">Rarity</th>
               <th className="py-2 px-4">Element</th>
-              <th className="py-2 px-4">HP</th>
-              <th className="py-2 px-4">Attack</th>
-              <th className="py-2 px-4">Defense</th>
-              <th className="py-2 px-4">Speed</th>
-              <th className="py-2 px-4">Crit Rate</th>
-              <th className="py-2 px-4">Crit DMG</th>
-              <th className="py-2 px-4">Lifesteal</th>
+              <th className="py-2 px-4">Rarity</th>
               <th className="py-2 px-4">Actions</th>
             </tr>
           </thead>
@@ -71,7 +64,12 @@ const ListHeroes: React.FC = () => {
                   rarityStyles[hero.rarity] || "border-gray-200 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
                 } hover:bg-opacity-80`}
               >
-                <td className="py-2 px-4 font-semibold">{hero.name}</td>
+                <td className="py-2 px-4">{hero.id}</td>
+                <td className="py-2 px-4 font-semibold">
+                  <Link to={`/admin/heroes/${hero.id}`} className="hover:underline">
+                    {hero.name}
+                  </Link>
+                </td>
                 <td>
                   <img
                     src={hero.image}
@@ -79,17 +77,9 @@ const ListHeroes: React.FC = () => {
                     className="w-16 h-16 object-cover rounded-lg"
                   />
                 </td>
-                <td className="py-2 px-4">{hero.description}</td>
                 <td className="py-2 px-4">{hero.class}</td>
-                <td className="py-2 px-4">{hero.rarity}</td>
                 <td className="py-2 px-4">{hero.element}</td>
-                <td className="py-2 px-4">{hero.hp}</td>
-                <td className="py-2 px-4">{hero.attack}</td>
-                <td className="py-2 px-4">{hero.defense}</td>
-                <td className="py-2 px-4">{hero.speed}</td>
-                <td className="py-2 px-4">{hero.critRate}%</td>
-                <td className="py-2 px-4">{hero.critDamage}%</td>
-                <td className="py-2 px-4">{hero.lifesteal}%</td>
+                <td className="py-2 px-4">{hero.rarity}</td>
                 <td className="py-2 px-4">
                   <Link
                     to={`/admin/heroes/edit/${hero.id}`}

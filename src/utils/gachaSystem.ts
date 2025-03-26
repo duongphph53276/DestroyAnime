@@ -4,14 +4,14 @@ import { RarityType } from "../interfaces/Rarity";
 import { HeroClass } from "../interfaces/HeroClass";
 import { ElementGame } from "../interfaces/Elements";
 
-const gachaRates: Record<RarityType, number> = {
-    "Common": 0.1,
-    "Uncommon": 25, // 🛠️ Đổi từ 30 xuống 25 để khớp với db.json
-    "Rare": 12,
-    "Epic": 7,
-    "Legendary": 4.9,
-    "Mythic": 50,
-    "???": 1,
+export const gachaRates: Record<RarityType, number> = {
+    "Common": 55,
+    "Uncommon": 28, // 🛠️ Đổi từ 30 xuống 25 để khớp với db.json
+    "Rare": 10,
+    "Epic": 5.9,
+    "Legendary": 2,
+    "Mythic": 1,
+    "???": 0.1,
 };
 
 // 🔹 Hàm kiểm tra và ép kiểu an toàn

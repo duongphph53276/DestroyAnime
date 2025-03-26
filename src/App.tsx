@@ -18,6 +18,11 @@ import ClassInformation from "./components/docs/ClassInformation";
 import RegisterAdmin from "./middleware/RegisterAdmin";
 import UserList from "./components/admin/UserList";
 import UserEdit from "./components/admin/UserEdit";
+import ProfileEdit from "./components/client/ProfileEdit";
+import Profile from "./components/client/Profile";
+import HeroAdd from "./components/admin/HeroAdd";
+import HeroDetail from "./components/admin/HeroDetail";
+import HeroEdit from "./components/admin/HeroEdit";
 
 function AppRoutes() {
   return useRoutes([
@@ -34,6 +39,9 @@ function AppRoutes() {
       children: [
         { path: "", element: <Dashboard /> },
         { path: "heroes", element: <ListHeroes /> },
+        { path: "heroes/add", element: <HeroAdd /> },
+        { path: "heroes/:id", element: <HeroDetail /> },
+        { path: "heroes/edit/:id", element: <HeroEdit /> },
         { path: "users", element:<UserList/>},
         { path: "users/:id", element: <UserEdit /> }
       ],
@@ -44,6 +52,8 @@ function AppRoutes() {
       children: [
         { path: "", element: <Welcome /> },
         { path: "summon", element: <Summoner /> },
+        { path: "profile", element:<Profile/>},
+        { path:"profile/edit", element:<ProfileEdit/>}
       ],
     },
     {

@@ -1,7 +1,7 @@
 export type ElementGame = 
-    | "Water"    // 🌊 Biển  
-    | "Fire"     // 🔥 Dung Nham  
-    | "Earth"    // 🏔️ Đá  
+    | "Water"    // 🌊 Nước 
+    | "Fire"     // 🔥 Lửa
+    | "Earth"    // 🏔️ Đất 
     | "Wind"     // 🌪️ Gió  
     | "Thunder"  // ⚡ Sét  
     | "Frost"    // ❄️ Băng  

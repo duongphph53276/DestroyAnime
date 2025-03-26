@@ -19,7 +19,11 @@ const Register = () => {
     setLoading(true);
     const formData = new FormData(e.currentTarget);
     const values = Object.fromEntries(formData.entries());
-    const registerData = { ...values, role: "client" };
+    const registerData = {
+      ...values,
+      role: "client",
+      createdAt: new Date().toISOString(), // Thêm createdAt
+    };
 
     try {
       await axios.post("http://localhost:3000/register", registerData);

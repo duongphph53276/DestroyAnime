@@ -12,7 +12,7 @@ export interface IHero {
     rarity: RarityType;
     element: ElementGame;
     // level: number; mac dinh 1
-    // experience: number; mac dinh 0
+    // exp: number; mac dinh 0, exp sẽ tăng theo cấp số nhân cho mỗi một lv cần tăng
     hp: number;
     attack: number;
     defense: number;
@@ -20,7 +20,7 @@ export interface IHero {
     critRate: number; // Tỷ lệ chí mạng (%)
     critDamage: number; // Sát thương chí mạng (%)
     lifesteal: number; // Hút máu (%)
-    rage: number; // Nộ khí (dùng để kích hoạt skill)
+    rage: number; // Nộ khí (dùng để kích hoạt skill) (thường là 100% sẽ kích hoạt nộ khí)
     skills: ISkill[];
     exclusiveSkills?: ISkill[];
     evolution?: IEvolutionStage[];
