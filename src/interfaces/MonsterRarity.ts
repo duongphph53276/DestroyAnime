@@ -3,5 +3,6 @@ export type MonsterRarityType =
     | "Uncommon"  
     | "Rare"  
     | "Epic"  
-    | "Legend"  
+    | "Legend"
+    | "Mythic" 
     | "Boss";  

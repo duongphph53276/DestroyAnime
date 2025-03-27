@@ -15,9 +15,8 @@ import {
   PointElement,
   LineElement,
 } from "chart.js";
-import { Iuser } from "../../interfaces/user"; // Đảm bảo đường dẫn đúng
+import { Iuser } from "../../interfaces/user";
 
-// Đăng ký các thành phần của Chart.js
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -31,24 +30,31 @@ ChartJS.register(
 );
 
 const Dashboard = () => {
-  const { darkMode } = useOutletContext<{ darkMode: boolean }>(); // Đồng bộ dark mode
+  const { darkMode } = useOutletContext<{ darkMode: boolean }>();
   const [users, setUsers] = useState<Iuser[]>([]);
+  const [heroes, setHeroes] = useState([]);
+  const [monsters, setMonsters] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Lấy dữ liệu người dùng từ API
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchData = async () => {
       try {
-        const { data } = await axios.get("http://localhost:3000/users");
-        setUsers(data);
+        const [usersResponse, heroesResponse, monstersResponse] = await Promise.all([
+          axios.get("http://localhost:3000/users"),
+          axios.get("http://localhost:3000/heroes"),
+          axios.get("http://localhost:3000/monsters"),
+        ]);
+        setUsers(usersResponse.data);
+        setHeroes(heroesResponse.data);
+        setMonsters(monstersResponse.data);
         setLoading(false);
       } catch (err) {
-        console.error("Lỗi khi lấy dữ liệu người dùng:", err);
+        console.error("Lỗi khi lấy dữ liệu:", err);
         setLoading(false);
       }
     };
 
-    fetchUsers();
+    fetchData();
   }, []);
 
   if (loading) {
@@ -59,7 +65,6 @@ const Dashboard = () => {
     );
   }
 
-  // Dữ liệu cho biểu đồ
   const roleData = {
     labels: ["Admin", "Client"],
     datasets: [
@@ -99,13 +104,12 @@ const Dashboard = () => {
     ],
   };
 
-  // Giả định dữ liệu đăng ký theo thời gian (có thể thay bằng dữ liệu thực từ API)
   const registrationData = {
-    labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5"], // Giả lập
+    labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5"],
     datasets: [
       {
         label: "Người dùng mới",
-        data: [10, 15, 20, 25, 30], // Giả lập
+        data: [10, 15, 20, 25, 30],
         fill: false,
         borderColor: darkMode ? "rgba(75, 192, 192, 1)" : "rgba(54, 162, 235, 1)",
         tension: 0.1,
@@ -113,34 +117,52 @@ const Dashboard = () => {
     ],
   };
 
+  const entityData = {
+    labels: ["Heroes", "Monsters"],
+    datasets: [
+      {
+        label: "Số lượng",
+        data: [heroes.length, monsters.length],
+        backgroundColor: darkMode
+          ? ["rgba(153, 102, 255, 0.6)", "rgba(255, 159, 64, 0.6)"]
+          : ["rgba(153, 102, 255, 0.6)", "rgba(255, 159, 64, 0.6)"],
+        borderColor: darkMode
+          ? ["rgba(153, 102, 255, 1)", "rgba(255, 159, 64, 1)"]
+          : ["rgba(153, 102, 255, 1)", "rgba(255, 159, 64, 1)"],
+        borderWidth: 1,
+      },
+    ],
+  };
+
   const chartOptions = {
     responsive: true,
+    maintainAspectRatio: false, // Tắt tỷ lệ khung hình mặc định
     plugins: {
       legend: {
         labels: {
-          color: darkMode ? "#ffffff" : "#000000", // Màu chữ legend
+          color: darkMode ? "#ffffff" : "#000000",
         },
       },
       title: {
         display: true,
-        color: darkMode ? "#ffffff" : "#000000", // Màu chữ title
+        color: darkMode ? "#ffffff" : "#000000",
       },
     },
     scales: {
       x: {
         ticks: {
-          color: darkMode ? "#ffffff" : "#000000", // Màu chữ trục X
+          color: darkMode ? "#ffffff" : "#000000",
         },
         grid: {
-          color: darkMode ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)", // Màu lưới
+          color: darkMode ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)",
         },
       },
       y: {
         ticks: {
-          color: darkMode ? "#ffffff" : "#000000", // Màu chữ trục Y
+          color: darkMode ? "#ffffff" : "#000000",
         },
         grid: {
-          color: darkMode ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)", // Màu lưới
+          color: darkMode ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)",
         },
       },
     },
@@ -159,9 +181,12 @@ const Dashboard = () => {
         >
           Dashboard Admin
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[400px]">
           {/* Biểu đồ cột: Số lượng người dùng theo vai trò */}
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
+          <div
+            className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md"
+            style={{ minHeight: "300px", width: "100%" }}
+          >
             <Bar
               data={roleData}
               options={{
@@ -175,7 +200,10 @@ const Dashboard = () => {
           </div>
 
           {/* Biểu đồ tròn: Tỷ lệ tài khoản khóa */}
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
+          <div
+            className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md"
+            style={{ minHeight: "300px", width: "100%" }}
+          >
             <Pie
               data={lockData}
               options={{
@@ -189,7 +217,10 @@ const Dashboard = () => {
           </div>
 
           {/* Biểu đồ đường: Người dùng đăng ký theo thời gian */}
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
+          <div
+            className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md"
+            style={{ minHeight: "300px", width: "100%" }}
+          >
             <Line
               data={registrationData}
               options={{
@@ -197,6 +228,23 @@ const Dashboard = () => {
                 plugins: {
                   ...chartOptions.plugins,
                   title: { ...chartOptions.plugins.title, text: "Người dùng mới theo thời gian" },
+                },
+              }}
+            />
+          </div>
+
+          {/* Biểu đồ cột: Tổng số Heroes và Monsters */}
+          <div
+            className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md"
+            style={{ minHeight: "300px", width: "100%" }}
+          >
+            <Bar
+              data={entityData}
+              options={{
+                ...chartOptions,
+                plugins: {
+                  ...chartOptions.plugins,
+                  title: { ...chartOptions.plugins.title, text: "Tổng số Heroes và Monsters" },
                 },
               }}
             />

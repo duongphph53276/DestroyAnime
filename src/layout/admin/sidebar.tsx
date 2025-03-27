@@ -43,12 +43,12 @@ const SidebarAdmin = ({ darkMode, setDarkMode }: SidebarAdminProps) => {
         {/* Quản lý anh hùng */}
         <li className="relative">
           <button
-            onClick={() => toggleDropdown("products")}
+            onClick={() => toggleDropdown("heroes")}
             className="w-full text-left p-3 rounded-md flex justify-between items-center hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
           >
-            Quản lý anh hùng <span>{dropdownOpen.products ? "▲" : "▼"}</span>
+            Quản lý anh hùng <span>{dropdownOpen.heroes ? "▲" : "▼"}</span>
           </button>
-          {dropdownOpen.products && (
+          {dropdownOpen.heroes && (
             <ul className="ml-4 border-l border-gray-300 dark:border-gray-600 pl-2 mt-1 space-y-1">
               <li>
                 <Link
@@ -70,13 +70,44 @@ const SidebarAdmin = ({ darkMode, setDarkMode }: SidebarAdminProps) => {
           )}
         </li>
 
+
+        {/* Quản lý quái vật */}
+        <li className="relative">
+          <button
+            onClick={() => toggleDropdown("monsters")}
+            className="w-full text-left p-3 rounded-md flex justify-between items-center hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+          >
+            Quản lý quái vật <span>{dropdownOpen.monsters ? "▲" : "▼"}</span>
+          </button>
+          {dropdownOpen.monsters && (
+            <ul className="ml-4 border-l border-gray-300 dark:border-gray-600 pl-2 mt-1 space-y-1">
+              <li>
+                <Link
+                  to="/admin/monsters"
+                  className="block p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                >
+                  Danh sách
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/admin/monsters/add"
+                  className="block p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                >
+                  Thêm mới
+                </Link>
+              </li>
+            </ul>
+          )}
+        </li>
+
         {/* Quản lý đơn hàng */}
         <li>
           <Link
             to="/admin/orders"
             className="block p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
           >
-            Quản lý đơn hàng
+            Quản lý chức năng
           </Link>
         </li>
 

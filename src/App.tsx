@@ -23,6 +23,11 @@ import Profile from "./components/client/Profile";
 import HeroAdd from "./components/admin/HeroAdd";
 import HeroDetail from "./components/admin/HeroDetail";
 import HeroEdit from "./components/admin/HeroEdit";
+import MonsterList from "./components/admin/MonsterList";
+import MonsterAdd from "./components/admin/MonsterAdd";
+import MonsterDetail from "./components/admin/MonsterDetail";
+import MonsterEdit from "./components/admin/MonsterEdit";
+import FAQ from "./components/docs/FAQ";
 
 function AppRoutes() {
   return useRoutes([
@@ -42,6 +47,10 @@ function AppRoutes() {
         { path: "heroes/add", element: <HeroAdd /> },
         { path: "heroes/:id", element: <HeroDetail /> },
         { path: "heroes/edit/:id", element: <HeroEdit /> },
+        { path: "monsters", element:<MonsterList/>},
+        { path: "monsters/add", element: <MonsterAdd /> },
+        { path: "monsters/:id", element: <MonsterDetail /> },
+        { path: "monsters/edit/:id", element: <MonsterEdit /> },
         { path: "users", element:<UserList/>},
         { path: "users/:id", element: <UserEdit /> }
       ],
@@ -64,6 +73,7 @@ function AppRoutes() {
         { path: "rarity", element: <RarityInformation /> },
         { path: "element", element: <ElementInformation /> },
         { path: "class", element: <ClassInformation /> },
+        { path: "faq", element: <FAQ /> },
       ],
     },
   ]);
