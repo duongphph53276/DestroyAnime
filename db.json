@@ -352,7 +352,32 @@
     }
   ],
   "skills": [],
-  "items": [],
+  "items": [
+    {
+      "id": 1,
+      "name": "Health Potion",
+      "description": "Hồi 50 HP cho hero.",
+      "rarity": "Common",
+      "type": "consumable",
+      "effect": {
+        "type": "heal",
+        "value": 50
+      },
+      "expirationDate": null
+    },
+    {
+      "id": 2,
+      "name": "Dragon Blade",
+      "description": "Tăng 20 công kích cho hero.",
+      "rarity": "Epic",
+      "type": "equipment",
+      "effect": {
+        "type": "attack_boost",
+        "value": 20
+      },
+      "expirationDate": null
+    }
+  ],
   "gachaRates": {
     "Common": 0.1,
     "Uncommon": 25,
@@ -361,5 +386,34 @@
     "Legendary": 4.9,
     "Mythic": 50,
     "???": 1
-  }
+  },
+  "userGames": [
+    {
+      "userId": 1,
+      "resources": {
+        "silver": 10000,
+        "gold": 500,
+        "diamond": 100
+      },
+      "heroes": [1, 13],
+      "items": [
+        { "id": 1, "quantity": 5 },
+        { "id": 2, "quantity": 1 }
+      ],
+      "level": 10
+    },
+    {
+      "userId": 2,
+    "resources": {
+      "silver": 5000,
+      "gold": 200,
+      "diamond": 50
+    },
+    "heroes": [2],
+    "items": [
+      { "id": 1, "quantity": 3 }
+    ],
+    "level": 5
+    }
+  ]
 }
