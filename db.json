@@ -58,7 +58,7 @@
       "class": "Tanker",
       "rarity": "Legendary",
       "element": "Light",
-      "image":"abc.example",
+      "image": "abc.example",
       "description": "Arthur là một người anh hùng",
       "hp": 1000,
       "attack": 40,
@@ -89,7 +89,7 @@
       "class": "Assassin",
       "rarity": "Rare",
       "element": "Wind",
-      "image":"abc.example",
+      "image": "abc.example",
       "hp": 900,
       "attack": 50,
       "defense": 10,
@@ -392,28 +392,42 @@
       "userId": 1,
       "resources": {
         "silver": 10000,
-        "gold": 500,
+        "gold": 50000,
         "diamond": 100
       },
-      "heroes": [1, 13],
+      "heroes": [
+        1,
+        13
+      ],
       "items": [
-        { "id": 1, "quantity": 5 },
-        { "id": 2, "quantity": 1 }
+        {
+          "id": 1,
+          "quantity": 5
+        },
+        {
+          "id": 2,
+          "quantity": 1
+        }
       ],
       "level": 10
     },
     {
       "userId": 2,
-    "resources": {
-      "silver": 5000,
-      "gold": 200,
-      "diamond": 50
-    },
-    "heroes": [2],
-    "items": [
-      { "id": 1, "quantity": 3 }
-    ],
-    "level": 5
+      "resources": {
+        "silver": 5000,
+        "gold": 200,
+        "diamond": 50
+      },
+      "heroes": [
+        2
+      ],
+      "items": [
+        {
+          "id": 1,
+          "quantity": 3
+        }
+      ],
+      "level": 5
     }
   ]
 }
